@@ -1,0 +1,33 @@
+package com.example.lab5whatsapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+    Button waButton;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        waButton = (Button) findViewById(R.id.button);
+    }
+    public void waNumber (View view){
+        PackageManager packageManager = getPackageManager ();
+        Intent i = new Intent (Intent.ACTION_VIEW);
+        String message = "Type your message here";
+        String phone = "+601137630057";
+        //put phone number here (must have account)
+        try{
+            String url = "https://api.whatsapp.com/send?phone="+phone+"text="+URLEncoder.encode(message, "UTF-8");
+        i.setPackage("com.whatsapp");
+        i.setData(Uri.parse(url));
+        if (i.resolveActivity (packageManager) != null){
+            startActvity (i);
+        }
+        } catch (Exception e){
+            s.printStackTrace ();
+        }}
